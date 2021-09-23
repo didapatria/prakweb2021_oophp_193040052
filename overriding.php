@@ -7,18 +7,15 @@ class Produk
     $penulis,
     $penerbit,
     $harga,
-    $jmlHalaman,
-    $waktuMain;
+    $jmlHalaman;
 
   // constructor
-  public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0)
+  public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0)
   {
     $this->judul = $judul;
     $this->penulis = $penulis;
     $this->penerbit = $penerbit;
     $this->harga = $harga;
-    $this->jmlHalaman = $jmlHalaman;
-    $this->waktuMain = $waktuMain;
     // kegunaan this untuk mengambil isi property yang ada pada class yang bersangkutan ketika dibuat instansi
     // sedangkan pada parameter itu function atau method merupakan variabel lokal
   }
@@ -42,6 +39,18 @@ class Produk
 // inheritance
 class Komik extends Produk
 {
+  // property
+  public $jmlHalaman;
+
+  // constructor
+  public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0)
+  {
+
+    parent::__construct($judul, $penulis, $penerbit, $harga);
+
+    $this->jmlHalaman = $jmlHalaman;
+  }
+
   // method
   public function getInfoProduk()
   {
@@ -53,10 +62,22 @@ class Komik extends Produk
 // inheritance
 class Game extends Produk
 {
+  // property
+  public $waktuMain;
+
+  // constructor
+  public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $waktuMain = 0)
+  {
+
+    parent::__construct($judul, $penulis, $penerbit, $harga);
+
+    $this->waktuMain = $waktuMain;
+  }
+
   // method
   public function getInfoProduk()
   {
-    $str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) ~ {$this->waktuMain} Jam.";
+    $str = "Game : " . parent::getInfoProduk() . " ~ {$this->waktuMain} Jam.";
     return $str;
   }
 }
@@ -72,8 +93,8 @@ class CetakInfoProduk
 }
 
 // membuat object instance dari class
-$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0);
-$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 0, 50);
+$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100);
+$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 50);
 
 echo $produk1->getInfoProduk();
 echo "<br>";
