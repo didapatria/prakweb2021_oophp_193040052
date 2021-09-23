@@ -6,8 +6,7 @@ class Produk
   public $judul,
     $penulis,
     $penerbit,
-    $harga,
-    $jmlHalaman;
+    $harga;
 
   // constructor
   public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0)
